@@ -45,9 +45,19 @@ open class BarrierTapeDrawable : Drawable() {
         set(value) {
             field = value; invalidateSelf()
         }
+    @FloatRange(from = 0.0) @Px
+    var thickness:Float = 20F
+        @MainThread
+        set(value) {
+            field = value; invalidateSelf()
+        }
 
     private var alpha:Int = 255
     private val paint = Paint()
+    private val debugPaint = Paint().apply {
+        color = Color.RED
+        strokeWidth = 1F
+    }
     private var colors = mutableListOf(Color.YELLOW, Color.BLACK)
     private var topLeftRadius = 0F
     private var topRightRadius = 0F
@@ -115,6 +125,7 @@ open class BarrierTapeDrawable : Drawable() {
         val topCornerPoint =  if (isReversed) Point(0F, 0F) else Point(width, 0F)
 
         val clipPath = Path()
+        val op = Path()
         when (shape) {
             Shape.RECTANGLE -> {
                 val corners = FloatArray(8)
@@ -122,15 +133,19 @@ open class BarrierTapeDrawable : Drawable() {
                 corners[2] = topRightRadius; corners[3] = topRightRadius
                 corners[4] = bottomRightRadius; corners[5] = bottomRightRadius
                 corners[6] = bottomLeftRadius; corners[7] = bottomLeftRadius
+                if (thickness > 0) op.addRoundRect(RectF(thickness, thickness, width - thickness, height - thickness), corners, Path.Direction.CW)
                 clipPath.addRoundRect(RectF(0F, 0F, width, height), corners, Path.Direction.CW)
             }
             Shape.OVAL ->  {
+                if (thickness > 0) op.addOval(RectF(thickness, thickness, width - thickness, height - thickness), Path.Direction.CW)
                 clipPath.addOval(RectF(0F, 0F, width, height),  Path.Direction.CW)
             }
             Shape.CIRCLE -> {
                 val halfWidth = width / 2F
                 val halfHeight = height / 2F
-                clipPath.addCircle(halfWidth, halfHeight, min(halfHeight, halfWidth),  Path.Direction.CW)
+                val radius = min(halfHeight, halfWidth)
+                if (thickness > 0) op.addCircle(halfWidth, halfHeight, radius - thickness,  Path.Direction.CW)
+                clipPath.addCircle(halfWidth, halfHeight, radius,  Path.Direction.CW)
             }
             Shape.TRIANGLE ->  {
 
@@ -216,7 +231,7 @@ open class BarrierTapeDrawable : Drawable() {
                 }
             }
         }
-
+        if (thickness > 0) clipPath.op(op, Path.Op.DIFFERENCE)
         var colorIndex = 0
         canvas.clipPath(clipPath)
         pointsFrom.forEachIndexed { i, pointFrom ->
