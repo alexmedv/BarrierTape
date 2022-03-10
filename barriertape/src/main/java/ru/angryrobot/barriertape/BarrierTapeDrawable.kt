@@ -11,9 +11,7 @@ import androidx.annotation.IntRange
 import androidx.annotation.MainThread
 import androidx.annotation.Px
 import org.xmlpull.v1.XmlPullParser
-import kotlin.math.abs
-import kotlin.math.min
-import kotlin.math.sqrt
+import kotlin.math.*
 import kotlin.reflect.KMutableProperty1
 
 open class BarrierTapeDrawable : Drawable() {
@@ -107,6 +105,11 @@ open class BarrierTapeDrawable : Drawable() {
         super.inflate(r, parser, attrs, theme)
     }
 
+    private fun calcTrianglePoint(top: Point, ab: Point, ac: Point, thickness: Float): Point {
+        val alpha = acos((ab * ac) / (ab.module * ac.module))
+        return top + (ab / ab.module + ac / ac.module) * (thickness / sin(alpha))
+    }
+
     override fun draw(canvas: Canvas) {
         val startTime = SystemClock.elapsedRealtime()
         val height = bounds.height().toFloat()
@@ -147,31 +150,32 @@ open class BarrierTapeDrawable : Drawable() {
                 if (thickness > 0) op.addCircle(halfWidth, halfHeight, radius - thickness,  Path.Direction.CW)
                 clipPath.addCircle(halfWidth, halfHeight, radius,  Path.Direction.CW)
             }
-            Shape.TRIANGLE ->  {
+            Shape.TRIANGLE -> {
 
-                when (triangleOrientation) {
-                    TriangleOrientation.LEFT ->  {
-                        clipPath.apply {
-                            moveTo( 0F, 0F); lineTo(0F, height); lineTo(width, height / 2)
-                        }
+                val (a, b, c) = when (triangleOrientation) {
+                    TriangleOrientation.LEFT -> {
+                        Triple(Point(0F, 0F), Point(0F, height), Point(width, height / 2))
                     }
-                    TriangleOrientation.RIGHT ->  {
-                        clipPath.apply {
-                            moveTo( width, 0F); lineTo(width, height); lineTo(0F, height / 2)
-                        }
+                    TriangleOrientation.RIGHT -> {
+                        Triple(Point(width, 0F), Point(width, height), Point(0F, height / 2))
                     }
                     TriangleOrientation.TOP -> {
-                        clipPath.apply {
-                            moveTo( 0F, 0F); lineTo(width, 0F); lineTo(width / 2F, height)
-                        }
+                        Triple(Point(0F, 0F), Point(width, 0F), Point(width / 2F, height))
                     }
-                    TriangleOrientation.BOTTOM ->  {
-                        clipPath.apply {
-                            moveTo(width / 2F, 0F); lineTo(width, height); lineTo(0F, height)
-                        }
+                    TriangleOrientation.BOTTOM -> {
+                        Triple(Point(width / 2F, 0F), Point(width, height), Point(0F, height))
                     }
                 }
 
+                clipPath.apply {
+                    moveTo(a); lineTo(b); lineTo(c)
+                }
+
+                if (thickness > 0) {
+                    op.moveTo(calcTrianglePoint(a, b - a, c - a, thickness))
+                    op.lineTo(calcTrianglePoint(b, a - b, c - b, thickness))
+                    op.lineTo(calcTrianglePoint(c, a - c, b - c, thickness))
+                }
             }
             Shape.EQUILATERAL_TRIANGLE -> {
 
@@ -199,35 +203,30 @@ open class BarrierTapeDrawable : Drawable() {
                     marginX to marginY
                 }
 
-                when (triangleOrientation) {
-                    TriangleOrientation.LEFT ->  {
-                        clipPath.apply {
-                            moveTo(marginX, marginY)
-                            lineTo(marginX, height - marginY)
-                            lineTo(width - marginX, height / 2F)
-                        }
+                val (a, b, c) = when (triangleOrientation) {
+                    TriangleOrientation.LEFT -> {
+                        Triple(Point(marginX, marginY), Point(marginX, height - marginY), Point(width - marginX, height / 2F))
                     }
-                    TriangleOrientation.RIGHT ->  {
-                        clipPath.apply {
-                            moveTo(width - marginX, marginY)
-                            lineTo(width - marginX, height - marginY)
-                            lineTo( marginX, height / 2F)
-                        }
+                    TriangleOrientation.RIGHT -> {
+                        Triple(Point(width - marginX, marginY), Point(width - marginX, height - marginY), Point(marginX, height / 2F))
                     }
-                    TriangleOrientation.TOP ->  {
-                        clipPath.apply {
-                            moveTo(marginX, marginY)
-                            lineTo(width - marginX, marginY)
-                            lineTo(width / 2F, height - marginY)
-                        }
+                    TriangleOrientation.TOP -> {
+
+                        Triple(Point(marginX, marginY), Point(width - marginX, marginY), Point(width / 2F, height - marginY))
                     }
-                    TriangleOrientation.BOTTOM ->  {
-                        clipPath.apply {
-                            moveTo(width / 2F, marginY)
-                            lineTo(width - marginX, height - marginY)
-                            lineTo(marginX, height - marginY)
-                        }
+                    TriangleOrientation.BOTTOM -> {
+                        Triple(Point(width / 2F, marginY), Point(width - marginX, height - marginY), Point(marginX, height - marginY))
                     }
+                }
+
+                clipPath.apply {
+                    moveTo(a); lineTo(b); lineTo(c)
+                }
+
+                if (thickness > 0) {
+                    op.moveTo(calcTrianglePoint(a, b - a, c - a, thickness))
+                    op.lineTo(calcTrianglePoint(b, a - b, c - b, thickness))
+                    op.lineTo(calcTrianglePoint(c, a - c, b - c, thickness))
                 }
             }
         }
@@ -374,6 +373,13 @@ private class Point(val x: Float, val y: Float) {
     var topCorner:Boolean = false
     var bottomCorner:Boolean = false
     override fun toString() = "(x:$x y:$y)"
+    operator fun plus(other:Point)  = Point(x + other.x, y+other.y)
+    operator fun minus(other:Point)  = Point(x - other.x, y-other.y)
+    operator fun times(other:Float) =  Point(x * other, y * other)
+    operator fun times(other:Point) =  x * other.x + y * other.y
+    operator fun div(input:Float) = Point(x / input, y / input)
+    val module:Float
+        get() = sqrt(x.pow(2) + y.pow(2))
 }
 
 enum class Shape {
@@ -390,3 +396,7 @@ enum class TriangleOrientation(val isHorizontal: Boolean) {
     TOP(false),
     BOTTOM(false)
 }
+
+private fun Path.moveTo(point:Point) = moveTo(point.x, point.y)
+private fun Path.lineTo(point:Point) = lineTo(point.x, point.y)
+private fun Canvas.drawPoint(point: Point, paint: Paint) = drawPoint(point.x, point.y, paint)
