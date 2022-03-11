@@ -43,8 +43,9 @@ open class BarrierTapeDrawable : Drawable() {
         set(value) {
             field = value; invalidateSelf()
         }
-    @FloatRange(from = 0.0) @Px
-    var thickness:Float = 20F
+
+    @IntRange(from = 0) @Px
+    var borderWidth:Int = 0
         @MainThread
         set(value) {
             field = value; invalidateSelf()
@@ -105,7 +106,7 @@ open class BarrierTapeDrawable : Drawable() {
         super.inflate(r, parser, attrs, theme)
     }
 
-    private fun calcTrianglePoint(top: Point, ab: Point, ac: Point, thickness: Float): Point {
+    private fun calcTrianglePoint(top: Point, ab: Point, ac: Point, thickness: Int): Point {
         val alpha = acos((ab * ac) / (ab.module * ac.module))
         return top + (ab / ab.module + ac / ac.module) * (thickness / sin(alpha))
     }
@@ -136,18 +137,18 @@ open class BarrierTapeDrawable : Drawable() {
                 corners[2] = topRightRadius; corners[3] = topRightRadius
                 corners[4] = bottomRightRadius; corners[5] = bottomRightRadius
                 corners[6] = bottomLeftRadius; corners[7] = bottomLeftRadius
-                if (thickness > 0) op.addRoundRect(RectF(thickness, thickness, width - thickness, height - thickness), corners, Path.Direction.CW)
+                if (borderWidth > 0) op.addRoundRect(RectF(borderWidth.toFloat(), borderWidth.toFloat(), width - borderWidth, height - borderWidth), corners, Path.Direction.CW)
                 clipPath.addRoundRect(RectF(0F, 0F, width, height), corners, Path.Direction.CW)
             }
             Shape.OVAL ->  {
-                if (thickness > 0) op.addOval(RectF(thickness, thickness, width - thickness, height - thickness), Path.Direction.CW)
+                if (borderWidth > 0) op.addOval(RectF(borderWidth.toFloat(), borderWidth.toFloat(), width - borderWidth, height - borderWidth), Path.Direction.CW)
                 clipPath.addOval(RectF(0F, 0F, width, height),  Path.Direction.CW)
             }
             Shape.CIRCLE -> {
                 val halfWidth = width / 2F
                 val halfHeight = height / 2F
                 val radius = min(halfHeight, halfWidth)
-                if (thickness > 0) op.addCircle(halfWidth, halfHeight, radius - thickness,  Path.Direction.CW)
+                if (borderWidth > 0) op.addCircle(halfWidth, halfHeight, radius - borderWidth,  Path.Direction.CW)
                 clipPath.addCircle(halfWidth, halfHeight, radius,  Path.Direction.CW)
             }
             Shape.TRIANGLE -> {
@@ -171,10 +172,10 @@ open class BarrierTapeDrawable : Drawable() {
                     moveTo(a); lineTo(b); lineTo(c)
                 }
 
-                if (thickness > 0) {
-                    op.moveTo(calcTrianglePoint(a, b - a, c - a, thickness))
-                    op.lineTo(calcTrianglePoint(b, a - b, c - b, thickness))
-                    op.lineTo(calcTrianglePoint(c, a - c, b - c, thickness))
+                if (borderWidth > 0) {
+                    op.moveTo(calcTrianglePoint(a, b - a, c - a, borderWidth))
+                    op.lineTo(calcTrianglePoint(b, a - b, c - b, borderWidth))
+                    op.lineTo(calcTrianglePoint(c, a - c, b - c, borderWidth))
                 }
             }
             Shape.EQUILATERAL_TRIANGLE -> {
@@ -223,14 +224,14 @@ open class BarrierTapeDrawable : Drawable() {
                     moveTo(a); lineTo(b); lineTo(c)
                 }
 
-                if (thickness > 0) {
-                    op.moveTo(calcTrianglePoint(a, b - a, c - a, thickness))
-                    op.lineTo(calcTrianglePoint(b, a - b, c - b, thickness))
-                    op.lineTo(calcTrianglePoint(c, a - c, b - c, thickness))
+                if (borderWidth > 0) {
+                    op.moveTo(calcTrianglePoint(a, b - a, c - a, borderWidth))
+                    op.lineTo(calcTrianglePoint(b, a - b, c - b, borderWidth))
+                    op.lineTo(calcTrianglePoint(c, a - c, b - c, borderWidth))
                 }
             }
         }
-        if (thickness > 0) clipPath.op(op, Path.Op.DIFFERENCE)
+        if (borderWidth > 0) clipPath.op(op, Path.Op.DIFFERENCE)
         var colorIndex = 0
         canvas.clipPath(clipPath)
         pointsFrom.forEachIndexed { i, pointFrom ->

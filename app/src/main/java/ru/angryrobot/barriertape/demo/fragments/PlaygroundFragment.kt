@@ -40,6 +40,7 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
         binding.seekBarY.setOnSeekBarChangeListener(this)
         binding.radius.setOnSeekBarChangeListener(this)
         binding.width.setOnSeekBarChangeListener(this)
+        binding.seekBarBorderWidth.setOnSeekBarChangeListener(this)
 
         binding.imageView.background = barrierTape
 
@@ -125,6 +126,8 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
             R.id.radius -> barrierTape.setRadius(progress.toFloat())
 
             R.id.width -> barrierTape.lineWidth = progress + 1
+
+            R.id.seekBarBorderWidth -> barrierTape.borderWidth = progress
         }
     }
 
