@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:ignore="SpeakableTextPresentCheck">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_github" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/githubLinkBlock"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:text="BarrierTape"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
 
         <TextView
-            android:layout_width="match_parent"
+
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center_horizontal"
-            android:text="About BarrierTape:"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:text="More information and examples are available on the GitHub:" />
+
+        <TextView
+            android:id="@+id/githubLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#180aa6"
+            android:textSize="13sp"
+            tools:text="https://......." />
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
+
