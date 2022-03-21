@@ -14,4 +14,7 @@ open class BaseFragment : Fragment() {
         exitTransition = Fade(Visibility.MODE_OUT)
     }
 
+    val Int.dp
+    get() = (this * resources.displayMetrics.density).toInt()
+
 }

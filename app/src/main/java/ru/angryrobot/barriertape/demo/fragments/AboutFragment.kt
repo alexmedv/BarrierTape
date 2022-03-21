@@ -11,8 +11,7 @@ import ru.angryrobot.barriertape.demo.databinding.AboutFragmentBinding
 
 class AboutFragment : BaseFragment() {
 
-    val url = "https://github.com/alexmedv/BarrierTape"
-
+    private val url = "https://github.com/alexmedv/BarrierTape"
     private lateinit var binding: AboutFragmentBinding
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {

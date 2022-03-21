@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ru.angryrobot.barriertape.BarrierTapeDrawable
+import ru.angryrobot.barriertape.Shape
+import ru.angryrobot.barriertape.TriangleOrientation
 import ru.angryrobot.barriertape.demo.databinding.DemoFragmentBinding
 
 class DemoFragment : BaseFragment() {
@@ -12,6 +15,23 @@ class DemoFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
         binding = DemoFragmentBinding.inflate(inflater, container, false)
+        binding.banner1.background = BarrierTapeDrawable().apply {
+            lineWidth = 20.dp
+        }
+
+        binding.tape2.background = BarrierTapeDrawable().apply {
+            shape = Shape.CIRCLE
+            lineWidth = 20.dp
+            borderWidth = 10.dp
+        }
+
+        binding.tape3.background = BarrierTapeDrawable().apply {
+            shape = Shape.EQUILATERAL_TRIANGLE
+            triangleOrientation = TriangleOrientation.TOP
+            lineWidth = 20.dp
+            borderWidth = 10.dp
+        }
+
         return binding.root
     }
 }
