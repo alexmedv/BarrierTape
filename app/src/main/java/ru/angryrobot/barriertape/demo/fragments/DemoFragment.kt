@@ -15,7 +15,8 @@ class DemoFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
         binding = DemoFragmentBinding.inflate(inflater, container, false)
-        binding.banner1.background = BarrierTapeDrawable().apply {
+
+        binding.tape1.background = BarrierTapeDrawable().apply {
             lineWidth = 20.dp
         }
 
@@ -29,6 +30,21 @@ class DemoFragment : BaseFragment() {
             shape = Shape.EQUILATERAL_TRIANGLE
             triangleOrientation = TriangleOrientation.TOP
             lineWidth = 20.dp
+            borderWidth = 10.dp
+        }
+
+        binding.tape4.background = BarrierTapeDrawable().apply {
+            lineWidth = 20.dp
+        }
+
+        binding.tape5.background = BarrierTapeDrawable().apply {
+            lineWidth = 20.dp
+        }
+
+        binding.tape6.background = BarrierTapeDrawable().apply {
+            lineWidth = 20.dp
+            setColors(listOf(0xcf322e, 0xd7d4d5))
+            setRadius(10F)
             borderWidth = 10.dp
         }
 

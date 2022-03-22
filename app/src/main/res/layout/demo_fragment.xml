@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:textColor="@color/black" />
 
         <FrameLayout
-            android:id="@+id/banner1"
+            android:id="@+id/tape1"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:layout_marginBottom="16dp">
@@ -41,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:text="Service is unavailable 😔"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/black"
                     android:textSize="22sp" />
 
                 <TextView
@@ -49,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
                     android:text="see you later"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
         </FrameLayout>
@@ -57,7 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="6dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -68,11 +69,11 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="41dp"
                     android:fontFamily="sans-serif-condensed"
+                    android:gravity="top"
                     android:includeFontPadding="false"
                     android:text="90"
                     android:textColor="@color/black"
@@ -88,15 +89,19 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:includeFontPadding="false"
                     android:text="speed limit"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    tools:ignore="SpUsage" />
             </LinearLayout>
 
             <FrameLayout
                 android:id="@+id/tape3"
                 android:layout_width="130dp"
                 android:layout_height="120dp">
+
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -106,6 +111,69 @@
             </FrameLayout>
         </LinearLayout>
 
+        <FrameLayout
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="95dp">
+
+            <View
+                android:id="@+id/tape4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:rotation="-10"
+                tools:background="#FFFFFF00" />
+
+            <View
+                android:id="@+id/tape5"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:rotation="10"
+                tools:background="#FFFFFF00" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tape6"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_cone" />
+
+                <LinearLayout
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service is unavailable"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="see you later" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 
