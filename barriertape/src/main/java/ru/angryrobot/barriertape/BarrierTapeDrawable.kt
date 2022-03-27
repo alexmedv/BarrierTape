@@ -1,16 +1,13 @@
 package ru.angryrobot.barriertape
 
-import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.SystemClock
-import android.util.AttributeSet
 import android.util.Log
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.annotation.MainThread
 import androidx.annotation.Px
-import org.xmlpull.v1.XmlPullParser
 import kotlin.math.*
 import kotlin.reflect.KMutableProperty1
 
@@ -26,6 +23,7 @@ open class BarrierTapeDrawable : Drawable() {
 
     @IntRange(from = 1) @Px
     var lineWidth = 25
+        @MainThread
         set(value) {
             assert(value >= 1) { "LineWidth must be > 0 (input value = $value)" }
             field = value
@@ -100,10 +98,6 @@ open class BarrierTapeDrawable : Drawable() {
         colors.clear()
         colors.addAll(newColors)
         invalidateSelf()
-    }
-
-    override fun inflate( r: Resources, parser: XmlPullParser, attrs: AttributeSet, theme: Resources.Theme? ) {
-        super.inflate(r, parser, attrs, theme)
     }
 
     private fun calcTrianglePoint(top: Point, ab: Point, ac: Point, thickness: Int): Point {

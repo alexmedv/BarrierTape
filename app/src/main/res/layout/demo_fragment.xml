@@ -112,9 +112,9 @@
         </LinearLayout>
 
         <FrameLayout
-            android:layout_marginBottom="16dp"
             android:layout_width="match_parent"
-            android:layout_height="95dp">
+            android:layout_height="95dp"
+            android:layout_marginBottom="16dp">
 
             <View
                 android:id="@+id/tape4"
@@ -138,10 +138,11 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginBottom="16dp">
+
             <LinearLayout
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="70dp"
@@ -150,10 +151,10 @@
                     app:srcCompat="@drawable/ic_cone" />
 
                 <LinearLayout
-                    android:layout_marginStart="16dp"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
                     android:orientation="vertical">
 
 
@@ -175,6 +176,59 @@
             </LinearLayout>
         </FrameLayout>
 
+        <LinearLayout
+            android:id="@+id/tape7"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="6dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#B4000000"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/ic_laser" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:text="Caution"
+                        android:textAllCaps="true"
+                        android:textColor="@color/laser_icon"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:text="laser in use"
+                        android:textAllCaps="true"
+                        android:textColor="@color/laser_icon"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

@@ -17,4 +17,7 @@ open class BaseFragment : Fragment() {
     val Int.dp
     get() = (this * resources.displayMetrics.density).toInt()
 
+    val Float.dp
+    get() = this * resources.displayMetrics.density
+
 }

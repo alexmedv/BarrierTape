@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import ru.angryrobot.barriertape.BarrierTapeDrawable
 import ru.angryrobot.barriertape.Shape
 import ru.angryrobot.barriertape.TriangleOrientation
+import ru.angryrobot.barriertape.demo.R
 import ru.angryrobot.barriertape.demo.databinding.DemoFragmentBinding
 
 class DemoFragment : BaseFragment() {
@@ -44,8 +45,15 @@ class DemoFragment : BaseFragment() {
         binding.tape6.background = BarrierTapeDrawable().apply {
             lineWidth = 20.dp
             setColors(listOf(0xcf322e, 0xd7d4d5))
-            setRadius(10F)
+            setRadius(10F.dp)
             borderWidth = 10.dp
+        }
+        val laserColor = resources.getColor(R.color.laser_icon)
+        binding.tape7.background = BarrierTapeDrawable().apply {
+            lineWidth = 20.dp
+            isReversed = true
+            setColors(listOf(laserColor, 0x000000))
+            setRadius(20F.dp)
         }
 
         return binding.root
