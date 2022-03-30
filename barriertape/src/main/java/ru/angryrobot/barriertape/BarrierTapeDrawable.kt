@@ -30,7 +30,7 @@ open class BarrierTapeDrawable : Drawable() {
             invalidateSelf()
         }
 
-    var triangleOrientation = TriangleOrientation.BOTTOM
+    var triangleOrientation = TriangleOrientation.LEFT
         @MainThread
         set(value) {
             field = value; invalidateSelf()
@@ -50,7 +50,9 @@ open class BarrierTapeDrawable : Drawable() {
         }
 
     private var alpha:Int = 255
-    private val paint = Paint()
+    private val paint = Paint().apply {
+        isAntiAlias = false
+    }
     private val debugPaint = Paint().apply {
         color = Color.RED
         strokeWidth = 1F

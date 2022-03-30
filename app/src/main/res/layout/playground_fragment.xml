@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             tools:srcCompat="@tools:sample/avatars" />
     </FrameLayout>
@@ -61,8 +61,6 @@
                 android:layout_height="match_parent"
                 android:text="Reversed"
                 tools:ignore="TouchTargetSizeCheck" />
-
-
         </LinearLayout>
 
 

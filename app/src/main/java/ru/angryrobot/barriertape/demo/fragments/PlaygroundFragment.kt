@@ -20,12 +20,12 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
     val barrierTape = BarrierTapeDrawable()
 
     private lateinit var binding: PlaygroundFragmentBinding
-    //https://colorswall.com/
+
     private val palettes = listOf(
         listOf(Color.BLACK, Color.YELLOW),
         listOf(0x62bb47, 0xfcb827, 0xf6821f, 0xe03a3c, 0x963d97, 0x009ddc, 0xffffff, 0x999999, 0x000000),
-        listOf( 0x673ab7, 0x5d34a5,  0x522e92, 0x482980, 0x3e236e, 0x341d5c, 0x291749, 0x1f1137, 0x150c25, 0x0a0612 ),
-        listOf(0xff0000, 0xffa500, 0xffff00, 0x008000, 0x0000ff, 0x4b0082, 0xee82ee),
+        listOf(0x000000, 0xECB537),
+        listOf(0xd7d4d5, 0xcf322e),
         listOf(0x408d57,0x47a157, 0x6dba5e, 0x8fcf61, 0x43b7ad, 0x489ad8, 0x3777bd, 0x2e6187, 0x9a3f40, 0xe03d3c, 0xf0892f, 0xf3c73d)
     )
 
@@ -35,6 +35,9 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.width.progress = 40.dp
+        barrierTape.lineWidth = 40.dp
 
         binding.seekBarX.setOnSeekBarChangeListener(this)
         binding.seekBarY.setOnSeekBarChangeListener(this)
@@ -125,7 +128,7 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
 
             R.id.radius -> barrierTape.setRadius(progress.toFloat())
 
-            R.id.width -> barrierTape.lineWidth = progress + 1
+            R.id.width -> barrierTape.lineWidth = progress + 5.dp
 
             R.id.seekBarBorderWidth -> barrierTape.borderWidth = progress
         }
