@@ -11,16 +11,47 @@ import androidx.annotation.Px
 import kotlin.math.*
 import kotlin.reflect.KMutableProperty1
 
+/**
+ *  @see <a href="https://github.com/alexmedv/BarrierTape">More information and examples are available on the  GitHub</a>
+ */
 open class BarrierTapeDrawable : Drawable() {
 
     private val tag = "BarrierTape"
+    private var alpha:Int = 255
+    private var colors = mutableListOf(Color.YELLOW, Color.BLACK)
+    private var topLeftRadius = 0F
+    private var topRightRadius = 0F
+    private var bottomLeftRadius = 0F
+    private var bottomRightRadius = 0F
 
+    private val paint = Paint().apply {
+        isAntiAlias = false
+    }
+
+    /**
+     *  Set colors of barrier tape
+     *  @param newColors  should contains at least 2 colors
+     */
+    @MainThread
+    fun setColors(newColors: Collection<Int>) {
+        assert(newColors.size >= 2) { "At least 2 colors are needed" }
+        colors.clear()
+        colors.addAll(newColors)
+        invalidateSelf()
+    }
+
+    /**
+     * Specifies the incline of the barrier tape lines (LTR or RTL)
+     */
     var isReversed: Boolean = false
         @MainThread
         set(value) {
             field = value; invalidateSelf()
         }
 
+    /**
+     * Sets width of lines
+     */
     @IntRange(from = 1) @Px
     var lineWidth = 25
         @MainThread
@@ -30,18 +61,27 @@ open class BarrierTapeDrawable : Drawable() {
             invalidateSelf()
         }
 
+    /**
+     *  Sets triangle orientation. Can only be used for [Shape.TRIANGLE] or [Shape.EQUILATERAL_TRIANGLE].
+     */
     var triangleOrientation = TriangleOrientation.LEFT
         @MainThread
         set(value) {
             field = value; invalidateSelf()
         }
 
+    /**
+     * Sets the type of shape within which the barrier tape is drawn
+     */
     var shape: Shape = Shape.RECTANGLE
         @MainThread
         set(value) {
             field = value; invalidateSelf()
         }
 
+    /**
+     * If the parameter is zero, the barrier tape will completely fill the figure, otherwise a frame of width [borderWidth] will be drawn
+     */
     @IntRange(from = 0) @Px
     var borderWidth:Int = 0
         @MainThread
@@ -49,41 +89,34 @@ open class BarrierTapeDrawable : Drawable() {
             field = value; invalidateSelf()
         }
 
-    private var alpha:Int = 255
-    private val paint = Paint().apply {
-        isAntiAlias = false
-    }
-    private val debugPaint = Paint().apply {
-        color = Color.RED
-        strokeWidth = 1F
-    }
-    private var colors = mutableListOf(Color.YELLOW, Color.BLACK)
-    private var topLeftRadius = 0F
-    private var topRightRadius = 0F
-    private var bottomLeftRadius = 0F
-    private var bottomRightRadius = 0F
+    /**
+     *  Set radius for each corner individually. Can only be used for [Shape.RECTANGLE].
 
+     *  If [null] is passed, the radius does not change.
+     *  @param topLeftRadius radius of top left corner
+     *  @param topRightRadius radius of top right corner
+     *  @param bottomLeftRadius radius of bottom left corner
+     *  @param bottomRightRadius radius of bottom right corner
+
+     */
     @MainThread
     fun setRadius(
-        @FloatRange(from = 0.0) @Px topStartRadius: Float?,
-        @FloatRange(from = 0.0) @Px topEndRadius: Float?,
-        @FloatRange(from = 0.0) @Px bottomStartRadius: Float?,
-        @FloatRange(from = 0.0) @Px bottomEndRadius: Float?
+        @FloatRange(from = 0.0) @Px topLeftRadius: Float?,
+        @FloatRange(from = 0.0) @Px topRightRadius: Float?,
+        @FloatRange(from = 0.0) @Px bottomLeftRadius: Float?,
+        @FloatRange(from = 0.0) @Px bottomRightRadius: Float?
     ) {
-        checkAndSet(BarrierTapeDrawable::topLeftRadius, topStartRadius)
-        checkAndSet(BarrierTapeDrawable::topRightRadius, topEndRadius)
-        checkAndSet(BarrierTapeDrawable::bottomLeftRadius, bottomStartRadius)
-        checkAndSet(BarrierTapeDrawable::bottomRightRadius, bottomEndRadius)
+        checkAndSet(BarrierTapeDrawable::topLeftRadius, topLeftRadius)
+        checkAndSet(BarrierTapeDrawable::topRightRadius, topRightRadius)
+        checkAndSet(BarrierTapeDrawable::bottomLeftRadius, bottomLeftRadius)
+        checkAndSet(BarrierTapeDrawable::bottomRightRadius, bottomRightRadius)
         invalidateSelf()
     }
 
-    private fun checkAndSet(property: KMutableProperty1<BarrierTapeDrawable, Float>, input:Float?) {
-        input?.let { radius ->
-            assert(radius >= 0) { "Radius must be >= 0 (input value = $radius)" }
-            property.set(this, radius)
-        }
-    }
-
+    /**
+     *  Set same radius for all corners. Can only be used for [Shape.RECTANGLE]
+     *  @param radius radius of the corners
+     */
     @MainThread
     fun setRadius(@FloatRange(from = 0.0) @Px radius: Float) {
         assert(radius >= 0) { "Radius must be >= 0 (input value = $radius)" }
@@ -94,12 +127,11 @@ open class BarrierTapeDrawable : Drawable() {
         invalidateSelf()
     }
 
-    @MainThread
-    fun setColors(newColors: Collection<Int>) {
-        assert(newColors.size >= 2) { "At least 2 colors are needed" }
-        colors.clear()
-        colors.addAll(newColors)
-        invalidateSelf()
+    private fun checkAndSet(property: KMutableProperty1<BarrierTapeDrawable, Float>, input:Float?) {
+        input?.let { radius ->
+            assert(radius >= 0) { "Radius must be >= 0 (input value = $radius)" }
+            property.set(this, radius)
+        }
     }
 
     private fun calcTrianglePoint(top: Point, ab: Point, ac: Point, thickness: Int): Point {
@@ -267,7 +299,6 @@ open class BarrierTapeDrawable : Drawable() {
         Log.w(tag, "Drawing time: ${SystemClock.elapsedRealtime() - startTime} mSec" )
     }
 
-
     private fun createRtlPoints(pointsFrom:MutableList<Point>, pointsTo:MutableList<Point>, width:Float, height:Float) {
         var currentPos = width
 
@@ -308,7 +339,6 @@ open class BarrierTapeDrawable : Drawable() {
         pointsFrom += Point(0F, height)
         pointsTo += Point(0F, height)
     }
-
 
     private fun createLtrPoints(pointsFrom:MutableList<Point>, pointsTo:MutableList<Point>, width:Float, height:Float) {
         var currentPos = 0F
