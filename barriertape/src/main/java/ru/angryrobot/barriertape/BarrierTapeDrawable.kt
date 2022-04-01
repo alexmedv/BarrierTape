@@ -1,9 +1,22 @@
+/*
+ *  Copyright 2022 Alexander Medvedev
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package ru.angryrobot.barriertape
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.os.SystemClock
-import android.util.Log
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.annotation.MainThread
@@ -12,11 +25,21 @@ import kotlin.math.*
 import kotlin.reflect.KMutableProperty1
 
 /**
- *  @see <a href="https://github.com/alexmedv/BarrierTape">More information and examples are available on the  GitHub</a>
+ * This class allows you to create a barrier tape of different colors and shapes. It can be used as
+ * a background for any view or as content of [android.widget.ImageView]
+ *
+ *  @sample
+ *  val barrierTape = BarrierTapeDrawable()
+ *  barrierTape.setColors(listOf(0xcf322e, 0xd7d4d5))
+ *  imageView.background = barrierTape
+ *
+ *  @see <a href="https://github.com/alexmedv/BarrierTape">More information and examples</a>
+ *
+ *  @author
+ *  Alexander Medvedev
  */
 open class BarrierTapeDrawable : Drawable() {
 
-    private val tag = "BarrierTape"
     private var alpha:Int = 255
     private var colors = mutableListOf(Color.YELLOW, Color.BLACK)
     private var topLeftRadius = 0F
@@ -140,7 +163,6 @@ open class BarrierTapeDrawable : Drawable() {
     }
 
     override fun draw(canvas: Canvas) {
-        val startTime = SystemClock.elapsedRealtime()
         val height = bounds.height().toFloat()
         val width = bounds.width().toFloat()
 
@@ -295,8 +317,6 @@ open class BarrierTapeDrawable : Drawable() {
 
             canvas.drawPath(path, paint)
         }
-
-        Log.w(tag, "Drawing time: ${SystemClock.elapsedRealtime() - startTime} mSec" )
     }
 
     private fun createRtlPoints(pointsFrom:MutableList<Point>, pointsTo:MutableList<Point>, width:Float, height:Float) {
