@@ -37,7 +37,7 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.width.progress = 40.dp
-        barrierTape.lineWidth = 40.dp
+        barrierTape.stripeWidth = 40.dp
 
         binding.seekBarX.setOnSeekBarChangeListener(this)
         binding.seekBarY.setOnSeekBarChangeListener(this)
@@ -128,7 +128,7 @@ class PlaygroundFragment : BaseFragment() , SeekBar.OnSeekBarChangeListener,
 
             R.id.radius -> barrierTape.setRadius(progress.toFloat())
 
-            R.id.width -> barrierTape.lineWidth = progress + 5.dp
+            R.id.width -> barrierTape.stripeWidth = progress + 5.dp
 
             R.id.seekBarBorderWidth -> barrierTape.borderWidth = progress
         }

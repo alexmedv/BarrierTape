@@ -73,10 +73,10 @@ open class BarrierTapeDrawable : Drawable() {
         }
 
     /**
-     * Sets width of lines
+     * Sets width of the stripes
      */
     @IntRange(from = 1) @Px
-    var lineWidth = 25
+    var stripeWidth = 25
         @MainThread
         set(value) {
             assert(value >= 1) { "LineWidth must be > 0 (input value = $value)" }
@@ -325,7 +325,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos > 0) {
             val point = Point(currentPos, 0F)
             pointsFrom += point
-            currentPos -= lineWidth
+            currentPos -= stripeWidth
         }
         pointsFrom.lastOrNull()?.let { it.topCorner = true }
 
@@ -334,7 +334,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < height) {
             val point = Point(0F, currentPos)
             pointsFrom += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
 
         currentPos = 0F
@@ -342,7 +342,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < height) {
             val point = Point(width, currentPos)
             pointsTo += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
 
         pointsTo.lastOrNull()?.let { it.bottomCorner = true }
@@ -353,7 +353,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos > 0) {
             val point = Point(currentPos, height)
             pointsTo += point
-            currentPos -= lineWidth
+            currentPos -= stripeWidth
         }
 
         pointsFrom += Point(0F, height)
@@ -366,7 +366,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < width) {
             val point = Point(currentPos, 0F)
             pointsFrom += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
         pointsFrom.lastOrNull()?.let { it.topCorner = true }
 
@@ -375,7 +375,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < height) {
             val point = Point(width, currentPos)
             pointsFrom += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
 
         currentPos = 0F
@@ -383,7 +383,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < height) {
             val point = Point(0F, currentPos)
             pointsTo += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
 
         pointsTo.lastOrNull()?.let { it.bottomCorner = true }
@@ -393,7 +393,7 @@ open class BarrierTapeDrawable : Drawable() {
         while (currentPos < width) {
             val point = Point(currentPos, height)
             pointsTo += point
-            currentPos += lineWidth
+            currentPos += stripeWidth
         }
 
         pointsFrom += Point(width, height)
