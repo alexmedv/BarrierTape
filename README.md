@@ -9,13 +9,18 @@ dependencies {
 }
 ```
 
-## :sparkles: Examples
-The `BarrierTapeDrawable` can be used immediately after it is created without any additional setup. The result will be a rectangle with yellow and black lines
 
+## :sparkles: Examples
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161961033-3caf5631-65d7-4c24-b8fa-319e72dc88f0.jpg"></img>
+The `BarrierTapeDrawable` can be used immediately after it is created without any additional setup. The result will be a rectangle with yellow and black lines
+<br/>
 ```kotlin
+// create with default settings
 imageView.background = BarrierTapeDrawable()
 ```
-
+<br/>
+<hr/>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161953452-6af44bac-94e2-46e4-8095-05d0882d1ef1.jpg"></img>
 Now let's add some colors by replacing the default colors. You need at least two colors, the maximum number of colors is unlimited.<br/>
 :warning: Note that all parameter changes must be performed in the main thread
 
@@ -24,40 +29,45 @@ val barrierTape = BarrierTapeDrawable()
 barrierTape.setColors(listOf(0xcf322e, 0xd7d4d5))
 imageView.background = barrierTape
 ```
-
+<hr/>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161959759-4429bbb4-9696-4401-bc91-0e74cc1d3d77.jpg"></img>
 The width of the lines and their incline can be changed. All dimensions are specified in pixels.
 
 ```kotlin
 val barrierTape = BarrierTapeDrawable().apply {
-    stripeWidth = 40
-    isReversed = true
+  setColors(listOf(0x000000, 0xECB537))
+  stripeWidth = 80
+  isReversed = true
 }
 ```
-
+<hr/>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161949040-6041e590-6c42-4900-8072-f81f0cc0b9d0.jpg"></img>
 You can round any corners of a shape independently of each other<br/>
 :warning: Can only be used for `Shape.RECTANGLE`
 
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-    setRadius(topLeftRadius = 30F, topRightRadius = 30F, bottomLeftRadius = 0F, bottomRightRadius = 0F)
-    // to set the same radius for all corners you can use setRadius(10F)
+  setRadius(topLeftRadius = 30F, topRightRadius = 30F, bottomLeftRadius = 0F, bottomRightRadius = 0F)
+  // to set the same radius for all corners you can use setRadius(10F)
 }
 ```
-
+<hr/>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161949040-6041e590-6c42-4900-8072-f81f0cc0b9d0.jpg"></img>
 The barrier tape can be drawn in any of five shapes: `RECTANGLE`, `OVAL`, `CIRCLE`, `TRIANGLE` and `EQUILATERAL_TRIANGLE`
 
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-    shape = Shape.OVAL
+  shape = Shape.OVAL
 }
 ```
+<hr/>
+The barrier tape can be displayed as a frame. To use this mode, `borderWidth` must be greater than zero!
 
-The barrier tape can be displayed as a frame. To use this mode, `borderWidth` must be greater than zero
 
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-    shape = Shape.EQUILATERAL_TRIANGLE
-    borderWidth = 10
+  shape = Shape.EQUILATERAL_TRIANGLE
+  borderWidth = 10
 }
 ```
 
@@ -69,7 +79,7 @@ For a better understanding of the library's capabilities, there is a playground 
 ## :handshake: Contributing
 
 Contributions, issues and feature requests are welcome.<br />
-Feel free to check [issues page](./issues) if you want to contribute.<br />
+Feel free to check [issues page](https://github.com/alexmedv/BarrierTape/issues) if you want to contribute.<br />
 
 
 
