@@ -19,7 +19,7 @@ For a better understanding of the library's capabilities, there is a playground 
 
 
 ## :sparkles: Examples
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161961033-3caf5631-65d7-4c24-b8fa-319e72dc88f0.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162727616-c3ade675-8a75-4f46-b097-214ac142c738.png"></img>
 The `BarrierTapeDrawable` can be used immediately after it is created without any additional setup. The result will be a rectangle with yellow and black lines
 <br/>
 ```kotlin
@@ -29,8 +29,7 @@ imageView.background = BarrierTapeDrawable()
 <br/>
 <hr/>
 
-
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161953452-6af44bac-94e2-46e4-8095-05d0882d1ef1.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162728339-6a1e23ef-58a1-4fb5-a132-b913a3424c0c.png"></img>
 Now let's add some colors by replacing the default colors. You need at least two colors, the maximum number of colors is unlimited.<br/>
 :warning: Note that all parameter changes must be performed in the main thread
 
@@ -41,7 +40,7 @@ imageView.background = barrierTape
 ```
 <hr/>
 
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161959759-4429bbb4-9696-4401-bc91-0e74cc1d3d77.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162728573-42c526d0-f36c-4def-b979-097cbac8ab28.png"></img>
 The width of the lines and their incline can be changed. All dimensions are specified in pixels.
 
 ```kotlin
@@ -54,7 +53,7 @@ val barrierTape = BarrierTapeDrawable().apply {
 ```
 <hr/>
 
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162679460-a3802e51-0ff0-45b6-9b84-fad663220b17.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162728814-319f7266-231f-4648-924e-8dc08be66391.png"></img>
 You can round any corners of a shape independently of each other<br/>
 :warning: Can only be used for `Shape.RECTANGLE`
 
@@ -69,7 +68,7 @@ imageView.background = BarrierTapeDrawable().apply {
 
 <hr/>
 
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162687273-68c1b044-374b-4d9e-8ff5-bfc30258449c.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162730423-0064571e-58b6-4f5e-887e-33156e761f08.png"></img>
 The barrier tape can be drawn in any of five shapes: `RECTANGLE`, `OVAL`, `CIRCLE`, `TRIANGLE` and `EQUILATERAL_TRIANGLE`
 
 ```kotlin
@@ -80,7 +79,7 @@ imageView.background = BarrierTapeDrawable().apply {
 ```
 <hr/>
 
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162681461-7f52bfa9-f650-465e-937c-23e1fb20c350.jpg"></img>
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162735498-a336ce90-5d92-439a-b13c-ebece52453e2.png"></img>
 
 The barrier tape can be displayed as a frame. To use this mode, `borderWidth` must be greater than zero.
 ```kotlin
@@ -92,9 +91,7 @@ imageView.background = BarrierTapeDrawable().apply {
 
 ## :handshake: Contributing
 
-Contributions, issues and feature requests are welcome.<br />
-Feel free to check [issues page](https://github.com/alexmedv/BarrierTape/issues) if you want to contribute.<br />
-
+Contributions, issues and feature requests are welcome. Feel free to check [issues page](https://github.com/alexmedv/BarrierTape/issues) if you want to contribute.<br />
 
 
 ## :memo: License
