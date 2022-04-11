@@ -30,6 +30,7 @@ barrierTape.setColors(listOf(0xcf322e, 0xd7d4d5))
 imageView.background = barrierTape
 ```
 <hr/>
+
 <img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161959759-4429bbb4-9696-4401-bc91-0e74cc1d3d77.jpg"></img>
 The width of the lines and their incline can be changed. All dimensions are specified in pixels.
 
@@ -39,35 +40,42 @@ val barrierTape = BarrierTapeDrawable().apply {
   stripeWidth = 80
   isReversed = true
 }
+
 ```
 <hr/>
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161949040-6041e590-6c42-4900-8072-f81f0cc0b9d0.jpg"></img>
+
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162679460-a3802e51-0ff0-45b6-9b84-fad663220b17.jpg"></img>
 You can round any corners of a shape independently of each other<br/>
 :warning: Can only be used for `Shape.RECTANGLE`
 
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-  setRadius(topLeftRadius = 30F, topRightRadius = 30F, bottomLeftRadius = 0F, bottomRightRadius = 0F)
-  // to set the same radius for all corners you can use setRadius(10F)
+  setColors(listOf(0x408d57,0x47a157, 0x6dba5e, 0x8fcf61, 0x43b7ad, 0x489ad8, 0x3777bd, 0x2e6187, 0x9a3f40, 0xe03d3c, 0xf0892f, 0xf3c73d))
+  stripeWidth = 90
+  setRadius(topLeftRadius = 40F, topRightRadius = 40F, bottomLeftRadius = 0F, bottomRightRadius = 0F)
+  // to set the same radius for all corners you can use setRadius(40F)
 }
 ```
+
 <hr/>
-<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161949040-6041e590-6c42-4900-8072-f81f0cc0b9d0.jpg"></img>
+
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162687273-68c1b044-374b-4d9e-8ff5-bfc30258449c.jpg"></img>
 The barrier tape can be drawn in any of five shapes: `RECTANGLE`, `OVAL`, `CIRCLE`, `TRIANGLE` and `EQUILATERAL_TRIANGLE`
 
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-  shape = Shape.OVAL
+  shape = Shape.EQUILATERAL_TRIANGLE
+  triangleOrientation = TriangleOrientation.TOP
 }
 ```
 <hr/>
-The barrier tape can be displayed as a frame. To use this mode, `borderWidth` must be greater than zero!
 
+<img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/162681461-7f52bfa9-f650-465e-937c-23e1fb20c350.jpg"></img>
 
+The barrier tape can be displayed as a frame. To use this mode, `borderWidth` must be greater than zero.
 ```kotlin
 imageView.background = BarrierTapeDrawable().apply {
-  shape = Shape.EQUILATERAL_TRIANGLE
-  borderWidth = 10
+  borderWidth = 15
 }
 ```
 
