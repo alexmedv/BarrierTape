@@ -1,5 +1,5 @@
 
-<img align="left" src="https://user-images.githubusercontent.com/2558551/162724132-2ed06ebc-0e06-4f9e-9468-9533a2165cc0.png" width="50%">
+<img align="left" src="https://user-images.githubusercontent.com/2558551/162724132-2ed06ebc-0e06-4f9e-9468-9533a2165cc0.png" width="43%">
 
 ## :construction: About 
 Barrier tape is a great way to get a user's attention or alert them when a feature of your app is unavailable. This library allows you to create a barrier tape of different colors and shapes. It can be used as a background for any `View` or as content of `ImageView`
@@ -11,6 +11,10 @@ dependencies {
   implementation 'ru.angryrobot.barriertape:1.0.0'
 }
 ```
+
+## :joystick: Playground
+For a better understanding of the library's capabilities, there is a playground in the demo app. The user can change all the parameters in real time: color palettes, sizes, width of stripes, etc. 
+
 <img width="2000" height="0">
 
 
@@ -84,10 +88,6 @@ imageView.background = BarrierTapeDrawable().apply {
   borderWidth = 15
 }
 ```
-
-
-## :joystick: Playground
-For a better understanding of the library's capabilities, there is a playground in the demo app. The user can change all the parameters in real time: color palettes, sizes, width of stripes, etc. 
 
 
 ## :handshake: Contributing
