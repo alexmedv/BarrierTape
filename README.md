@@ -1,3 +1,6 @@
+
+<img align="left" src="https://user-images.githubusercontent.com/2558551/162724132-2ed06ebc-0e06-4f9e-9468-9533a2165cc0.png" width="50%">
+
 ## :construction: About 
 Barrier tape is a great way to get a user's attention or alert them when a feature of your app is unavailable. This library allows you to create a barrier tape of different colors and shapes. It can be used as a background for any `View` or as content of `ImageView`
 
@@ -8,6 +11,7 @@ dependencies {
   implementation 'ru.angryrobot.barriertape:1.0.0'
 }
 ```
+<img width="2000" height="0">
 
 
 ## :sparkles: Examples
@@ -20,6 +24,8 @@ imageView.background = BarrierTapeDrawable()
 ```
 <br/>
 <hr/>
+
+
 <img align="right" width="40%" src="https://user-images.githubusercontent.com/2558551/161953452-6af44bac-94e2-46e4-8095-05d0882d1ef1.jpg"></img>
 Now let's add some colors by replacing the default colors. You need at least two colors, the maximum number of colors is unlimited.<br/>
 :warning: Note that all parameter changes must be performed in the main thread
