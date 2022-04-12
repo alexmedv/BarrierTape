@@ -1,7 +1,9 @@
+# :construction: BarrierTape
+
 
 <img align="left" src="https://user-images.githubusercontent.com/2558551/162724132-2ed06ebc-0e06-4f9e-9468-9533a2165cc0.png" width="43%">
 
-## :construction: About 
+## :information_source: About 
 Barrier tape is a great way to get a user's attention or alert them when a feature of your app is unavailable. This library allows you to create a barrier tape of different colors and shapes. It can be used as a background for any `View` or as content of `ImageView`
 
 ## :wrench: Installation
@@ -89,10 +91,8 @@ imageView.background = BarrierTapeDrawable().apply {
 ```
 
 
-## :handshake: Contributing
-
-Contributions, issues and feature requests are welcome. Feel free to check [issues page](https://github.com/alexmedv/BarrierTape/issues) if you want to contribute.<br />
-
+## :handshake: Contributions are welcome
+Please use the [issues page](https://github.com/alexmedv/BarrierTape/issues) to report any bug you find or to request a new feature.
 
 ## :memo: License
 ```
