@@ -10,10 +10,10 @@ Barrier tape is a great way to get a user's attention or alert them when a featu
 Add the following dependency to your `build.gradle` file:
 ```groovy
 dependencies {
-  implementation 'ru.angryrobot.barriertape:1.0.0'
+  implementation 'com.github.alexmedv:BarrierTape:1.0.0'
 }
 ```
-
+:warning: Don't forget to add the JitPack maven repository to the list of repositories: `maven { url "https://jitpack.io" }`
 ## :joystick: Playground
 For a better understanding of the library's capabilities, there is a playground in the demo app. The user can change all the parameters in real time: color palettes, sizes, width of stripes, etc. 
 
